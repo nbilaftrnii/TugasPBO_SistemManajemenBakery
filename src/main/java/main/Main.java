@@ -175,7 +175,7 @@ public class Main {
                         
                 case 4:
                     System.out.println();
-                    System.out.println("Selamat Datang!");
+                    System.out.println("See u!");
                     System.out.println("Bake w Love 🥐");
                     break;
 
