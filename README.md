@@ -19,7 +19,6 @@ Program ini dibuat dengan menerapkan konsep Pemrograman Berorientasi Objek (OOP)
 - Menampilkan dan mengelola produk.
 - Membuat pesanan dan pembayaran.
 - Menghitung total harga dan kembalian.
-- Menerapkan konsep OOP seperti class, object, constructor, encapsulation, **inheritance**, dan polymorphism.
   
 ---
 ## 🗃️ Hierarki Class
