@@ -13,7 +13,7 @@
 
 Program yang dibuat adalah **Sistem Manajemen Bakery** berbasis **Command Line Interface (CLI)** menggunakan bahasa pemrograman **Java**.
 
-Sistem ini digunakan untuk mengelola data produk bakery dan pesanan pelanggan. Produk yang tersedia terdiri dari **Pastry** dan **Cake**. Pengguna dapat melihat daftar produk, membuat pesanan, menghitung total pembayaran, melakukan pembayaran, melihat kembalian, serta melihat daftar pesanan yang telah dibuat.
+Sistem ini digunakan untuk mengelola data produk bakery dan pesanan pelanggan. Produk yang tersedia terdiri dari **Pastry dan Cake**. Pengguna dapat melihat daftar produk, membuat pesanan, menghitung total pembayaran, melakukan pembayaran, melihat kembalian, serta melihat daftar pesanan yang telah dibuat.
 
 Program ini dibuat dengan menerapkan konsep Pemrograman Berorientasi Objek (OOP), seperti class, object, constructor, encapsulation, **inheritance**, polymorphism, dan ArrayList.
 
@@ -72,29 +72,49 @@ Struktur Package dari program ini terdiri dari beberapa package dan class yang m
     │ + tampilkanPesanan() : void        │
     └────────────────────────────────────┘
 
-- **Produk** berperan sebagai **superclass** (parent class) yang menyimpan atribut umum milik seluruh produk bakery: idProduk, namaProduk, harga, dan stok. Semua atribut bersifat private sehingga hanya bisa diakses melalui getter dan setter (encapsulation).
-- **Pastry** dan **Cake** adalah **subclass** (child class) yang mewarisi seluruh atribut dan method dari Produk, lalu menambahkan atribut khususnya masing-masing (rasa dan ukuranCake).
-- **Pesanan** tidak berada dalam hierarki pewarisan, melainkan memiliki relasi asosiasi dengan Produk. Sebuah pesanan memiliki satu objek produk sebagai referensi untuk menghitung total harga.
-- **Main** berada pada package terpisah dan bertugas menjalankan program, menampilkan menu, serta mengelola ArrayList<Produk> dan ArrayList<Pesanan>.
+- `Produk` berperan sebagai **superclass** (parent class) yang menyimpan atribut umum milik seluruh produk bakery: idProduk, namaProduk, harga, dan stok. Semua atribut bersifat private sehingga hanya bisa diakses melalui getter dan setter (encapsulation).
+- `Pastry` dan `Cake` adalah **subclass** (child class) yang mewarisi seluruh atribut dan method dari Produk, lalu menambahkan atribut khususnya masing-masing (rasa dan ukuranCake).
+- `Pesanan` tidak berada dalam hierarki pewarisan, melainkan memiliki relasi asosiasi dengan Produk. Sebuah pesanan memiliki satu objek produk sebagai referensi untuk menghitung total harga.
+- `Main` berada pada package terpisah dan bertugas menjalankan program, menampilkan menu, serta mengelola ArrayList<Produk> dan ArrayList<Pesanan>.
   
 ---
 ## 💻Penerapan Inheritance
 
 Inheritance diterapkan pada class `Pastry` dan `Cake` yang mewarisi class Produk.
 
-1. Superclass >> Produk.java
+**1. Superclass >> Produk.java**
 
-   
-`Produk` merupakan **superclass** yang menjadi dasar untuk class `Pastry` dan `Cake`. Class ini berisi atribut dan method umum yang dimiliki oleh setiap produk bakery, seperti ID produk, nama produk, harga, dan stok.
-Subclass >> Pastry.java**
+   <img width="516" height="241" alt="image" src="https://github.com/user-attachments/assets/13624fa1-2b50-4428-b136-d881d8bfe56e" />
+
+`Produk` merupakan **superclass** yang menjadi dasar untuk class `Pastry` dan `Cake`. Class ini berisi atribut dan method umum yang dimiliki oleh setiap produk bakery, seperti ID   produk, nama produk, harga, dan stok.
+
+**2. Subclass >> Pastry.java**
 
    <img width="721" height="124" alt="image" src="https://github.com/user-attachments/assets/aaa15323-d037-4df4-bfef-8b2c4e87a167" />
+
+Class `Pastry` merupakan **subclass** dari `Produk` yang memiliki atribut tambahan berupa jenis pastry. Hubungan inheritance diterapkan menggunakan **extends Produk**, sehingga `Pastry` dapat menggunakan atribut dan method yang berasal dari `Produk`. 
    
-**2. Subclass >> Cake.java**
+**3. Subclass >> Cake.java**
 
    <img width="752" height="128" alt="image" src="https://github.com/user-attachments/assets/c31f5585-b5b3-4166-acfd-57104dd4e0e5" />
 
-Penggunaan **extends** Produk menunjukkan bahwa Pastry dan Cake merupakan turunan dari Produk. Dengan inheritance, kedua class tersebut dapat menggunakan atribut dan method yang terdapat pada class Produk.
+Class `Cake` juga merupakan **subclass** dari `Produk`. Class ini memiliki atribut tambahan berupa ukuran cake dan dapat menggunakan atribut serta method yang diwarisi dari `Produk`.
+
+**4. Penerapan pada Method**
+
+Inheritance juga diterapkan pada method `tampilkanInfo()`. Method ini pertama kali dibuat pada superclass `Produk` untuk menampilkan informasi dasar produk seperti ID, nama, harga, dan stok.
+  
+  <img width="355" height="125" alt="image" src="https://github.com/user-attachments/assets/a02e4d5c-4f7d-4ce7-b3d6-f7e1cc37664c" />
+
+Method `tampilkanInfo()` kemudian **dioverride** pada class `Pastry`. Pada subclass ini, `super.tampilkanInfo()` digunakan untuk memanggil method dari superclass `Produk`, kemudian ditambahkan informasi khusus berupa jenis pastry.
+
+  <img width="312" height="108" alt="image" src="https://github.com/user-attachments/assets/71e66e91-01a9-45bb-911c-029a896860ac" />
+
+Hal yang sama diterapkan pada class `Cake`. Method `tampilkanInfo()` **dioverride** untuk menambahkan informasi khusus berupa ukuran cake setelah informasi dasar dari `Produk` ditampilkan.
+
+  <img width="368" height="105" alt="image" src="https://github.com/user-attachments/assets/bc17d1fa-f87e-4260-8b2e-297b4d7beabb" />
+
+Penggunaan `super.tampilkanInfo()` menunjukkan bahwa subclass memanggil method yang berasal dari superclass `Produk`, kemudian mengembangkan method tersebut dengan menambahkan informasi sesuai jenis produknya. Dengan demikian, `Produk` menyediakan fungsi dasar, sedangkan `Pastry` dan `Cake` menyesuaikannya sesuai kebutuhan masing-masing.
 
 ---
 ## ⚙️ Penjelasan Alur Program
