@@ -99,7 +99,6 @@ Penggunaan **extends** Produk menunjukkan bahwa Pastry dan Cake merupakan turuna
 
     Pada saat program dijalankan, sistem akan menampilkan menu utama yang berisi beberapa pilihan fitur. Menu ini menjadi halaman awal yang digunakan user untuk memilih proses yang ingin dilakukan.
     Kode:
-    ```
     
    <img width="264" height="157" alt="image" src="https://github.com/user-attachments/assets/a347ff0d-18c9-47d7-8ff8-3dd6491849e6" />
 
