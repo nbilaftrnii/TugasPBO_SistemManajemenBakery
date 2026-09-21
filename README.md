@@ -80,9 +80,13 @@ Struktur Package dari program ini terdiri dari beberapa package dan class yang m
 ---
 ## 💻Penerapan Inheritance
 
-Inheritance diterapkan pada class Pastry dan Cake yang mewarisi class Produk.
+Inheritance diterapkan pada class `Pastry` dan `Cake` yang mewarisi class Produk.
 
-**1. Subclass >> Pastry.java**
+1. Superclass >> Produk.java
+
+   
+`Produk` merupakan **superclass** yang menjadi dasar untuk class `Pastry` dan `Cake`. Class ini berisi atribut dan method umum yang dimiliki oleh setiap produk bakery, seperti ID produk, nama produk, harga, dan stok.
+Subclass >> Pastry.java**
 
    <img width="721" height="124" alt="image" src="https://github.com/user-attachments/assets/aaa15323-d037-4df4-bfef-8b2c4e87a167" />
    
@@ -97,33 +101,167 @@ Penggunaan **extends** Produk menunjukkan bahwa Pastry dan Cake merupakan turuna
 
 **1. Menu Utama** 
 
-    Pada saat program dijalankan, sistem akan menampilkan menu utama yang berisi beberapa pilihan fitur. Menu ini menjadi halaman awal yang digunakan user untuk memilih proses yang ingin dilakukan.
-    Kode:
+Program menampilkan menu utama yang berisi pilihan untuk menampilkan produk, membuat pesanan, melihat pesanan, dan keluar dari program. User memilih menu dengan memasukkan nomor pilihan. Setelah proses pada menu selesai, program akan kembali ke menu utama sampai user memilih menu Keluar.
+
+**Kode:**
+
+    int pilihan = 0;
+        
+        do {
+            System.out.println();
+            System.out.println("====================================");
+            System.out.println("           Bake w Love 🥐");
+            System.out.println("====================================");
+            System.out.println("1. Tampilkan Produk");
+            System.out.println("2. Tambah Pesanan");
+            System.out.println("3. Tampilkan Pesanan");
+            System.out.println("4. Keluar");
+            System.out.println("====================================");
+            System.out.print("Pilih menu : ");
+
+            pilihan = input.nextInt();
+            input.nextLine();
+
+   **Output:**
     
    <img width="264" height="157" alt="image" src="https://github.com/user-attachments/assets/a347ff0d-18c9-47d7-8ff8-3dd6491849e6" />
-
-   Program menampilkan menu utama yang berisi pilihan untuk melihat produk, membuat pesanan, melakukan pembayaran, dan melihat data pesanan. User dapat memilih menu dengan memasukkan nomor sesuai fitur yang ingin digunakan.
+<br><br>
 
 **2. Menampilkan Produk**
 
-   <img width="252" height="359" alt="image" src="https://github.com/user-attachments/assets/3d3b0247-9415-4014-bbc3-72b3e2a311c9" />
+User memilih menu Tampilkan Produk, kemudian sistem mengecek data pada daftarProduk. Jika terdapat produk, sistem menampilkan seluruh produk menggunakan method tampilkanInfo(). Informasi yang ditampilkan menyesuaikan jenis produk, seperti rasa pada Pastry dan ukuran pada Cake.
 
-   User memilih menu Tampilkan Produk, kemudian sistem menampilkan data produk berupa ID, nama, harga, stok, serta informasi tambahan sesuai jenis produk seperti rasa pada Pastry dan ukuran pada Cake.
+**Kode:**
+
+    switch (pilihan) {
+                case 1:
+                    System.out.println();
+                    System.out.println("---------- DAFTAR PRODUK ----------");
+
+                    if (daftarProduk.isEmpty()) {
+                        System.out.println("Belum ada produk.");
+                    } else {
+                        for (Produk produk : daftarProduk) {
+                            produk.tampilkanInfo();
+                            System.out.println("-----------------------------------");
+                        }
+                    }
+                    break;
+
+  **Output:**
+
+   <img width="252" height="359" alt="image" src="https://github.com/user-attachments/assets/3d3b0247-9415-4014-bbc3-72b3e2a311c9" />
+<br><br>
    
 **3. Tambah Pesanan**
 
-   <img width="261" height="393" alt="image" src="https://github.com/user-attachments/assets/aae185cf-b0f5-4c9f-991a-db3520e19159" />
+User memilih menu Tambah Pesanan, kemudian memasukkan ID pesanan, nama pelanggan, ID produk, dan jumlah pesanan. Sistem mencari produk berdasarkan ID dan mengecek stok. Jika data valid, sistem menghitung total harga dan menampilkan invoice berisi detail pesanan. Setelah itu user memasukkan jumlah uang pembayaran. Sistem akan mengecek apakah uang yang dibayarkan mencukupi. Jika kurang, pembayaran ditolak dan user diminta melakukan pembayaran kembali. Jika cukup, sistem menghitung kembalian dan pesanan berhasil disimpan.
 
-   User memilih menu Tambah Pesanan, kemudian memasukkan ID pesanan, nama pelanggan, ID produk, dan jumlah pesanan. Sistem menampilkan invoice berisi detail pesanan dan total harga. User kemudian memasukkan uang pembayaran, sistem memvalidasi pembayaran dan menghitung kembalian.
+**Kode:**
+
+    case 2:
+                    System.out.println();
+                    System.out.println("---------- TAMBAH PESANAN ----------");
+
+                    System.out.print("ID Pesanan       : ");
+                    int idPesanan = input.nextInt();
+                    input.nextLine();
+
+                    System.out.print("Nama Pelanggan   : ");
+                    String namaPelanggan = input.nextLine();
+
+                    System.out.print("ID Produk        : ");
+                    int idProduk = input.nextInt();
+
+                    Produk produkDipilih = null;
+
+                    for (Produk produk : daftarProduk) {
+                        if (produk.getIdProduk() == idProduk) {
+                            produkDipilih = produk;
+                            break;
+                        }
+                    }
+                    
+                    if (produkDipilih == null) {
+                        System.out.println("Produk tidak ditemukan.");
+                        break;
+                    }
+
+                    System.out.print("Jumlah Pesanan   : ");
+                    int jumlah = input.nextInt();
+
+                    if (jumlah <= 0) {
+                        System.out.println("Jumlah pesanan harus lebih dari 0.");
+                        break;
+                    }
+
+                    if (jumlah > produkDipilih.getStok()) {
+                        System.out.println("Stok produk tidak mencukupi.");
+                        break;
+                    }
+                    
+                    Pesanan pesanan = new Pesanan(
+                            idPesanan,
+                            namaPelanggan,
+                            produkDipilih,
+                            jumlah
+                    );
+
+  **Output:**
+
+   <img width="261" height="393" alt="image" src="https://github.com/user-attachments/assets/aae185cf-b0f5-4c9f-991a-db3520e19159" />
+<br><br>
 
 **4. Tampilkan Pesanan**
 
-   <img width="259" height="256" alt="image" src="https://github.com/user-attachments/assets/ed78b38a-7e48-4822-942c-84352d8fad7d" />
+User memilih menu Tampilkan Pesanan, kemudian sistem mengecek apakah sudah terdapat pesanan yang tersimpan. Jika ada, sistem menampilkan seluruh pesanan satu per satu melalui method tampilkanPesanan(). Informasi yang ditampilkan meliputi ID pesanan, nama pelanggan, produk yang dipesan, jumlah pesanan, dan total harga. Setelah semua pesanan ditampilkan, program kembali ke menu utama.
 
-   User memilih menu Tampilkan Pesanan, kemudian sistem menampilkan daftar pesanan yang telah dibuat. Informasi yang ditampilkan meliputi ID pesanan, nama pelanggan, produk, jumlah, dan total harga.
+**Kode:**
+
+    case 3:
+                    System.out.println();
+                    System.out.println("---------- DAFTAR PESANAN ----------");
+
+                    if (daftarPesanan.isEmpty()) {
+                        System.out.println("Belum ada pesanan.");
+                    } else {
+
+                        for (Pesanan pesananData : daftarPesanan) {
+                            pesananData.tampilkanPesanan();
+                            System.out.println("-----------------------------------");
+                        }
+                    }
+
+                    break;
+
+  **Output:**
+
+   <img width="259" height="256" alt="image" src="https://github.com/user-attachments/assets/ed78b38a-7e48-4822-942c-84352d8fad7d" />
+<br><br>
 
 **5. Keluar**
 
-   <img width="517" height="169" alt="image" src="https://github.com/user-attachments/assets/83473a6a-c928-4768-8944-0c52c504655d" />
+User memilih menu Keluar, kemudian program menampilkan pesan penutup. Setelah itu, perulangan berhenti karena pilihan user sudah bernilai 4, sehingga program selesai dijalankan.
 
-   User memilih menu Keluar, kemudian program menampilkan pesan penutup dan mengakhiri program. Program berhasil dijalankan hingga selesai dengan status BUILD SUCCESS.
+**Kode:**
+
+    case 4:
+                    System.out.println();
+                    System.out.println("See u!");
+                    System.out.println("Bake w Love 🥐");
+                    break;
+
+                default:
+                    System.out.println("Pilihan menu tidak tersedia.");
+                    break;
+            }
+
+        } while (pilihan != 4);
+
+        input.close();
+    }
+}
+
+**Output:**
+
+   <img width="517" height="169" alt="image" src="https://github.com/user-attachments/assets/83473a6a-c928-4768-8944-0c52c504655d" />
